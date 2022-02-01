@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Listas!1!</title>
+
+        <link
+            rel="stylesheet"
+            href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        />
+        <script>
+            console.log('hello world')
+        </script>
+    </head>
+    <body>
+        <!-- <i class="fab fa-amazon"></i> -->
+        <i data-feather="activity"></i>
+        <table border="1">
+            <!-- table row -->
+            <thead>
+                <tr>
+                    <!-- table header -->
+                    <th>Nome</th>
+                    <th>Idade</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>João</td>
+                <td rowspan="2">10</td>
+            </tr>
+            <tr>
+                <td>João</td>
+            </tr>
+            <tr>
+                <td colspan="2">Sem mais resultados</td>
+            </tr>
+        </table>
+
+        <ul>
+            <li>item 1</li>
+            <li>item 2</li>
+            <li>item 3</li>
+            <li>item 4</li>
+            <li>
+                subitms
+                <ul>
+                    <li>item 1</li>
+                    <li>item 2</li>
+                    <li>item 3</li>
+                    <li>item 4</li>
+                    <li>item 5</li>
+                </ul>
+            </li>
+        </ul>
+        <ol>
+            <li>item 1</li>
+            <li>item 2</li>
+            <li>item 3</li>
+            <li>item 4</li>
+            <li>
+                subitms
+                <ol>
+                    <li>item 1</li>
+                    <li>item 2</li>
+                    <li>item 3</li>
+                    <li>item 4</li>
+                    <li>item 5</li>
+                </ol>
+            </li>
+        </ol>
+        <script src="https://unpkg.com/feather-icons"></script>
+
+        <script>
+            feather.replace();
+        </script>
+    </body>
+</html>
