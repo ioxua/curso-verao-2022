@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CSS !1!</title>
+        <style>
+            #titulo {
+                font-style: italic;
+            }
+
+            .citacao {
+                color: grey;
+                background-color: lightcyan;
+                margin-left: 50px;
+            }
+
+            p#primeiroParagrafo {
+                font-size: 26px;
+            }
+
+            .rodape,
+            .propaganda p {
+                font-size: 12px;
+                color: red;
+                text-align: center;
+            }
+
+            .propaganda {
+                border: 3px dashed blue;
+                border-radius: 5px;
+                padding: 10px;
+            }
+
+            .propaganda img {
+                width: 100%;
+            }
+
+            ul li {
+                background-color: blue;
+            }
+
+            ul > li {
+                background-color: red;
+            }
+
+            input[value="Quero me inscrever!"] {
+                background-color: green;
+            }
+
+            .propaganda:hover {
+                border: 7px dashed green;
+            }
+
+            .propaganda:hover p {
+                font-size: 120%;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="pseudoclasses.html">ir pro exemplo de pseudoclasses</a>
+        <h1 id="titulo">Titulo da noticia</h1>
+        <p id="primeiroParagrafo">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque,
+            deserunt fuga nisi assumenda debitis expedita excepturi blanditiis
+            atque odit laudantium quis! Maxime, tempore fugit impedit
+            repellendus sint laudantium fugiat facere!
+        </p>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque,
+            deserunt fuga nisi assumenda debitis expedita excepturi blanditiis
+            atque odit laudantium quis! Maxime, tempore fugit impedit
+            repellendus sint laudantium fugiat facere!
+        </p>
+        <p class="citacao">-- eu não gosto de dar entrevistas</p>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque,
+            deserunt fuga nisi assumenda debitis expedita excepturi blanditiis
+            atque odit laudantium quis! Maxime, tempore fugit impedit
+            repellendus sint laudantium fugiat facere!
+        </p>
+
+        <div class="propaganda">
+            <img
+                src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2020/04/shelter-dog-cropped-1.jpg"
+            />
+            <p>Adote cachorrinhos bonitinhos</p>
+        </div>
+
+        <p class="citacao">-- eu não gosto de dar entrevistas</p>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque,
+            deserunt fuga nisi assumenda debitis expedita excepturi blanditiis
+            atque odit laudantium quis! Maxime, tempore fugit impedit
+            repellendus sint laudantium fugiat facere!
+        </p>
+        <span class="rodape"
+            >As opiniões deste artigo não representam aquelas d'O Nosso
+            Jornal</span
+        >
+
+        <ul>
+            <li>item 1</li>
+            <li>item 2</li>
+            <li>item 3</li>
+            <li>
+                item 4
+                <ol>
+                    <li>subitem 1</li>
+                    <li>subitem 2</li>
+                    <li>subitem 3</li>
+                    <li>subitem 4</li>
+                </ol>
+            </li>
+        </ul>
+
+        <input type="button" value="Quero me inscrever!" />
+    </body>
+</html>

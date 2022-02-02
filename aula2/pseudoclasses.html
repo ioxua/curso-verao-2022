@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            input[type="checkbox"]:checked {
+                background-color: red;
+            }
+            input:disabled {
+                color: grey;
+                background-color: darkgray;
+            }
+            p :first-child {
+                background-color: aquamarine;
+            }
+            p :last-child {
+                background-color: blanchedalmond;
+            }
+            p :nth-child(2n) {
+                font-weight: bold;
+            }
+
+            .puppy {
+                height: 150px;
+                /* background-color: red; */
+                /* background-position: center; */
+                background-size: cover;
+                background-image: url("https://d17fnq9dkz9hgj.cloudfront.net/uploads/2020/04/shelter-dog-cropped-1.jpg");
+            }
+
+            .pentagono {
+                clip-path: polygon(
+                    50% 0%,
+                    100% 38%,
+                    82% 100%,
+                    18% 100%,
+                    0% 38%
+                );
+            }
+
+            .estrela {
+                clip-path: polygon(
+                    50% 0%,
+                    61% 35%,
+                    98% 35%,
+                    68% 57%,
+                    79% 91%,
+                    50% 70%,
+                    21% 91%,
+                    32% 57%,
+                    2% 35%,
+                    39% 35%
+                );
+            }
+        </style>
+    </head>
+    <body>
+        <input type="checkbox" name="lembresedemim" id="" />
+        <input type="text" />
+        <input type="text" disabled value="vc n consegue me alterar" />
+
+        <p>
+            <span>primeiro</span>
+            <span>segundo</span>
+            <span>terceiro</span>
+            <span>quarto</span>
+            <span>quinto</span>
+            <span>sexto</span>
+        </p>
+
+        <div class="puppy pentagono"></div>
+        <div class="puppy estrela"></div>
+    </body>
+</html>
