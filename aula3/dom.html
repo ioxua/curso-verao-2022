@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM!1</title>
+    <style>
+        .italico {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <p id="meMude">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius molestias itaque accusantium veniam ullam. Necessitatibus, sed veniam? Hic impedit illo numquam quam delectus molestiae, distinctio non libero earum sapiente. Esse?</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius molestias itaque accusantium veniam ullam. Necessitatibus, sed veniam? Hic impedit illo numquam quam delectus molestiae, distinctio non libero earum sapiente. Esse?</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius molestias itaque accusantium veniam ullam. Necessitatibus, sed veniam? Hic impedit illo numquam quam delectus molestiae, distinctio non libero earum sapiente. Esse?</p>
+    
+    <script>
+        window.onload = function() {
+            console.log('carregou')
+        }
+        window.onunload = function() {
+            console.log('carregou')
+        }
+        document.addEventListener("visibilitychange", function() {
+            console.log('vis change', document.visibilityState)
+        });
+
+
+        const paragrafos = document.getElementsByTagName('p')
+        console.log(paragrafos)
+        if (paragrafos.length > 0) {
+            for (let i = 0; i < paragrafos.length; i++) {
+            // for (const p of paragrafos) {
+                const p = paragrafos[i]
+                console.log(i, p)
+                p.classList.add('italico')
+            }
+        }
+
+        const meMude = document.getElementById('meMude')
+        meMude.style.backgroundColor = 'blue'
+        meMude.onmouseover = function() {
+            console.log('vc passou por cima de mim')
+        }
+
+        console.log('====')
+        document
+        window
+          
+
+        function test() {
+            let a = 12;
+            b = 'oii'
+            if (a > 10) {
+                var b = 'asdasd'
+            }
+            console.log('dentro da fn', b)
+        }
+        test()
+        console.log('fora da fn', b)
+    </script>
+</body>
+</html>

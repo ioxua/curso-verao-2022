@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>forms</title>
+        <style>
+            .erro {
+                font-size: 0.8rem;
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="my-form">
+            <div>
+                <label for="nome">Nome:</label>
+                <input id="nome-input" type="text" name="nome" />
+                <span id="nome-erro" class="erro"></span>
+            </div>
+
+            <div>
+                <label for="cpf">CPF:</label>
+                <input id="cpf-input" type="text" name="cpf" maxlength="11"/>
+                <span id="cpf-erro" class="erro"></span>
+            </div>
+
+            <input type="submit" value="Enviar meu form" />
+        </form>
+
+        <script>
+            // Retirado de https://www.devmedia.com.br/validar-cpf-com-javascript/23916
+            function TestaCPF(strCPF) {
+                var Soma;
+                var Resto;
+                Soma = 0;
+                if (strCPF == "00000000000") return false;
+
+                for (i = 1; i <= 9; i++)
+                    Soma =
+                        Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+                Resto = (Soma * 10) % 11;
+
+                if (Resto == 10 || Resto == 11) Resto = 0;
+                if (Resto != parseInt(strCPF.substring(9, 10))) return false;
+
+                Soma = 0;
+                for (i = 1; i <= 10; i++)
+                    Soma =
+                        Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+                Resto = (Soma * 10) % 11;
+
+                if (Resto == 10 || Resto == 11) Resto = 0;
+                if (Resto != parseInt(strCPF.substring(10, 11))) return false;
+                return true;
+            }
+
+            const form = document.getElementById("my-form");
+            const nome = document.getElementById("nome-input");
+            const nomeErro = document.getElementById("nome-erro");
+            const cpf = document.getElementById("cpf-input");
+            const cpfErro = document.getElementById("cpf-erro");            
+
+            cpf.onkeydown = function() {
+                const value = cpf.value
+                cpf.value = value.replace(/[a-zA-z]/g, '')
+            }
+
+            form.onsubmit = function () {
+                nomeErro.innerHTML = "";
+                cpfErro.innerHTML = "";
+
+                let formularioValido = true;
+
+                if ("" === nome.value) {
+                    nomeErro.innerHTML = "<b>O nome é obrigatório<b/>";
+                    formularioValido = false;
+                }
+
+                if (!TestaCPF(cpf.value)) {
+                    cpfErro.innerText = "<b>O CPF está errado</b>";
+                    formularioValido = false;
+                }
+
+                if (!formularioValido) {
+                    return false;
+                }
+            };
+            // $.ready()
+            // window.onload = function() {
+
+            // }
+        </script>
+    </body>
+</html>

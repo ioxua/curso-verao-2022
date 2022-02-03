@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Portal de Noticias</title>
+        <link rel="stylesheet" href="portal.css" />
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            :root {
+                --link-color: rgb(14, 34, 183);
+            }
+
+            html {
+                font-family: 'Noto Serif';
+            }
+            .container {
+                width: 100%;
+                padding: 0 15px;
+            }
+            header {
+                min-height: 75px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            #main-menu {
+                min-height: 75px;
+                display: flex;
+                justify-content: space-between;
+                padding: 0 10px;
+            }
+            #main-menu #cta {
+                align-self: center;
+            }
+            #main-menu nav {
+                display: flex;
+                align-items: center;
+                gap: 7px;
+            }
+            a {
+                color: var(--link-color);
+                text-decoration: none;
+            }
+            a:hover {
+                border-bottom: 2px solid var(--link-color);
+                /* text-decoration: underline; */
+            }
+            /* nav a:not(:last-child) {
+                margin-right: 7px;
+            } */
+            main {
+                display: flex;
+            }
+            main aside {
+                flex: 3;
+            }
+
+            main aside .newsLink {
+                display: flex;
+                flex-direction: column;
+            }
+
+            main aside .newsLink .imageContainer {
+                flex: 1;
+            }
+
+            main aside .newsLink img {
+                max-width: 100%;
+            }
+
+            main section {
+                flex: 7;
+            }
+
+            main section article p:not(:last-child) {
+                margin-bottom: 15px;
+            }
+
+            footer {
+                background-color: darkgray;
+                min-height: 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <header class="container">
+            <h1>Portal de Notícias</h1>
+        </header>
+        <div id="main-menu" class="container">
+            <nav>
+                <a href="1">Notícias</a>
+                <a href="1">Famosos</a>
+                <a href="1">Tecnologia</a>
+            </nav>
+            <button id="cta">Assine!</button>
+        </div>
+        <main class="container">
+            <aside>
+                <h1>Mais lidas</h1>
+                <a href="noticia" class="newsLink">
+                    <div class="imageContainer">
+                        <img
+                            src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2020/04/shelter-dog-cropped-1.jpg"
+                        />
+                    </div>
+                    <!-- <span>Cachorrinhos para adoção!</span> -->
+                    <span>Cachorrinhos</span>
+                </a>
+            </aside>
+            <section>
+                <article>
+                    <h1>Titulo da noticia</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Voluptatibus, minus tempora perspiciatis odit
+                        quisquam, magnam culpa inventore consequuntur officia
+                        minima aliquam labore sapiente hic asperiores officiis
+                        animi vitae omnis repellat!
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Voluptatibus, minus tempora perspiciatis odit
+                        quisquam, magnam culpa inventore consequuntur officia
+                        minima aliquam labore sapiente hic asperiores officiis
+                        animi vitae omnis repellat!
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Voluptatibus, minus tempora perspiciatis odit
+                        quisquam, magnam culpa inventore consequuntur officia
+                        minima aliquam labore sapiente hic asperiores officiis
+                        animi vitae omnis repellat!
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Voluptatibus, minus tempora perspiciatis odit
+                        quisquam, magnam culpa inventore consequuntur officia
+                        minima aliquam labore sapiente hic asperiores officiis
+                        animi vitae omnis repellat!
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Voluptatibus, minus tempora perspiciatis odit
+                        quisquam, magnam culpa inventore consequuntur officia
+                        minima aliquam labore sapiente hic asperiores officiis
+                        animi vitae omnis repellat!
+                    </p>
+                </article>
+            </section>
+        </main>
+        <footer></footer>
+    </body>
+</html>
