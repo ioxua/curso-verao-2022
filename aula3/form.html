@@ -73,8 +73,8 @@
 
                 let formularioValido = true;
 
-                if ("" === nome.value) {
-                    nomeErro.innerHTML = "<b>O nome é obrigatório<b/>";
+                if ("" === nome.value || nome.value.length > 10) {
+                    nomeErro.innerHTML = "<b>O nome '" + nome.value + "' é inválido<b/>";
                     formularioValido = false;
                 }
 
