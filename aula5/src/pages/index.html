@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bootstrap</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <style>
+            #header-noticia {
+                background-image: url("https://d17fnq9dkz9hgj.cloudfront.net/uploads/2020/04/shelter-dog-cropped-1.jpg");
+                background-size: cover;
+                /* min-height: 70vh; */
+            }
+
+            #paywall {
+                position: fixed;
+                z-index: 100000;
+                width: 100vw;
+                height: 100vh;
+                background:radial-gradient(circle, rgba(0,62,134,1) 0%, rgba(0,4,45,1) 74%);
+                display: none;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="paywall">
+            <img src="https://s3.glbimg.com/v1/AUTH_65d1930a0bda476ba8d3c25c5371ec3f/piano/OGlobo/VENDAS/HOME/PADRAO/barreira_topo_desk.gif">
+        </div>
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="container-md">
+                <a class="navbar-brand" href="#">Portal de Notícias</a>
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#conteudoColapsavel"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="conteudoColapsavel">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Notícias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Famosos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Tecnologia</a>
+                        </li>
+                    </ul>
+                    <button class="btn btn-outline-primary" type="submit">
+                        Assine!
+                    </button>
+                    <button id="abrirpaywall" class="btn btn-outline-primary" type="submit">
+                        AbrirPaywall
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-md p-md-0 gx-3">
+            <!-- TODO fix gutter -->
+            <div class="row">
+                $$news$$
+            </div>
+        </div>
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-muted">Notícias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-muted">Famosos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-muted">Tecnologia</a>
+                </li>
+            </ul>
+            <p class="text-center text-muted">© 2022 Portal de Notícias, Inc</p>
+        </footer>
+        <script src="paywall.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
