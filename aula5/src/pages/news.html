@@ -70,13 +70,8 @@
             class="container-fluid py-5 px-5 mb-3 bg-dark text-light"
             id="header-noticia"
         >
-            <h1>Título da notícia</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum,
-                magni. Natus ullam expedita sint corrupti incidunt. Id officiis
-                eius ratione porro quam repellat excepturi hic facilis.
-                Consequatur praesentium ex debitis.
-            </p>
+            <h1>$$title$$</h1>
+            <p>$$description$$</p>
         </div>
         <div class="container-fluid container-md">
             <div class="row">
@@ -115,40 +110,10 @@
                     </div>
                 </div>
                 <article class="col-12 col-md-8 order-1 order-md-2">
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Suscipit, quia quas facere deleniti officiis sed
-                        vitae, dolore praesentium vel voluptatum quod cupiditate
-                        dolor iure totam nam doloremque pariatur aliquid quae!
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Suscipit, quia quas facere deleniti officiis sed
-                        vitae, dolore praesentium vel voluptatum quod cupiditate
-                        dolor iure totam nam doloremque pariatur aliquid quae!
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Suscipit, quia quas facere deleniti officiis sed
-                        vitae, dolore praesentium vel voluptatum quod cupiditate
-                        dolor iure totam nam doloremque pariatur aliquid quae!
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Suscipit, quia quas facere deleniti officiis sed
-                        vitae, dolore praesentium vel voluptatum quod cupiditate
-                        dolor iure totam nam doloremque pariatur aliquid quae!
-                    </p>
+                    $$text$$
                 </article>
             </div>
         </div>
-        <?
-            if (/* tem permissao /*) {
-                echo $noticia
-            } else {
-                echo $paywall
-            }
-        ?>
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item">

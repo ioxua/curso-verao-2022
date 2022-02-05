@@ -29,6 +29,20 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit, quia quas fa
 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit, quia quas facere deleniti officiis sed vitae, dolore praesentium vel voluptatum quod cupiditate dolor iure totam nam doloremque pariatur aliquid quae!
 `
     },
+    {  
+        id: 'noticia-3',
+        title: 'essa noticia eh mto legal ',
+        image: 'https://cdn.shopify.com/s/files/1/0272/4770/6214/articles/when-do-puppies-start-walking.jpg?v=1593020034',
+        description: 'lorem ipsum dolor sit amet 2',
+        text: `
+noticia legal osibdvasiudoipsajdbasd
+
+asodibuaviudsijdasbd
+as asodjsabhdisapd
+a
+asdibsadiosabdsadnsa
+`
+    },
 ]
 
 module.exports = {
