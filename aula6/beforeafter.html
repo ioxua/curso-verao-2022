@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            /* código gerado: https://divtable.com/table-styler/ */
+            table.greyGridTable {
+                border: 2px solid #ffffff;
+                width: 100%;
+                text-align: center;
+                border-collapse: collapse;
+            }
+            table.greyGridTable td,
+            table.greyGridTable th {
+                border: 1px solid #ffffff;
+                padding: 3px 4px;
+            }
+            table.greyGridTable tbody td {
+                font-size: 13px;
+            }
+            table.greyGridTable td:nth-child(even) {
+                background: #ebebeb;
+            }
+            table.greyGridTable thead {
+                background: #ffffff;
+                border-bottom: 4px solid #333333;
+            }
+            table.greyGridTable thead th {
+                font-size: 15px;
+                font-weight: bold;
+                color: #333333;
+                text-align: center;
+                border-left: 2px solid #333333;
+            }
+            table.greyGridTable thead th:first-child {
+                border-left: none;
+            }
+
+            table.greyGridTable tfoot {
+                font-size: 14px;
+                font-weight: bold;
+                color: #333333;
+                border-top: 4px solid #333333;
+            }
+            table.greyGridTable tfoot td {
+                font-size: 14px;
+            }
+        </style>
+        <style>
+            table.loading {
+                position: relative;
+            }
+            table.loading::before {
+                content: '';
+                background-color: black;
+                width: 100%;
+                height: 100%;
+                opacity: .7;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            table.loading::after {
+                --spinner-size: 20px;
+
+                content: '';
+                /* background-color: red; */
+                width: var(--spinner-size);
+                height: var(--spinner-size);
+
+                border-radius: 15px;
+                border: 3px dotted white;
+
+                position: absolute;
+                top: calc(50% - var(--spinner-size) / 2);
+                left: calc(50% - var(--spinner-size) / 2);
+
+                animation: spin 3s infinite;
+                animation-timing-function: linear;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg) }
+                50% { transform: rotate(180deg) }
+                100% { transform: rotate(360deg) }
+            }
+        </style>
+    </head>
+    <body>
+        <table id="loadableTable" class="greyGridTable loading">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Joao</td>
+                    <td>119123123123</td>
+                </tr>
+                <tr>
+                    <td>Maria</td>
+                    <td>119123123123</td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="startLoading">Start loading</button>
+
+        <script>
+            const button = document.getElementById('startLoading')
+            const table = document.getElementById('loadableTable')
+
+            button.onclick = () => {
+                table.classList.toggle('loading')
+            }
+        </script>
+    </body>
+</html>

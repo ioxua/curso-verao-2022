@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            .colorSquare {
+                width: 50px;
+                height: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="painting" width="800" height="600"></canvas>
+        <div class="colorSquare" data-ioxua-cs="red"></div>
+        <div class="colorSquare" data-ioxua-cs="#ff0"></div>
+        <div class="colorSquare" data-ioxua-cs="rgb(0, 0, 255)"></div>
+
+        <input id="colorSelector" type="color" disabled />
+        <script>
+            const squares = document.querySelectorAll('[data-ioxua-cs]')
+            for (const square of squares) {
+                const color = square.dataset.ioxuaCs
+                square.style.backgroundColor = color
+                square.onclick = () => {
+                    window.paintingState.color = color
+                }
+            }
+            console.log('sqqq', squares)
+        </script>
+        <script>
+            const canvas = document.getElementById("painting");
+            const colorSelector = document.getElementById("colorSelector");
+            const ctx = canvas.getContext("2d");
+
+            window.paintingState = {
+                brushSize: 50,
+                mouseIsDown: false,
+                color: "red",
+            };
+            
+
+            colorSelector.onclick = () => {
+                console.log("click");
+            };
+
+            colorSelector.onchange = () => {
+                window.paintingState.color = colorSelector.value;
+            };
+
+            const isClicking = () => {
+                window.paintingState.mouseIsDown = true;
+            };
+
+            const stoppedClicking = () => {
+                window.paintingState.mouseIsDown = false;
+            };
+
+            const isMoving = (evt) => {
+                if (window.paintingState.mouseIsDown) {
+                    const clickX = evt.x,
+                        clickY = evt.y;
+                    ctx.fillStyle = window.paintingState.color;
+
+                    const rectX = clickX - window.paintingState.brushSize / 2;
+                    const rectY = clickY - window.paintingState.brushSize / 2;
+
+                    ctx.fillRect(rectX, rectY, 50, 50);
+
+                    // ctx.rect(rectX, rectY, 50, 50);
+                    // ctx.fill();
+                }
+            };
+
+            canvas.onmousedown = isClicking;
+            canvas.onmouseup = stoppedClicking;
+            canvas.onmousemove = isMoving;
+
+            canvas.ontouchstart = isClicking;
+            canvas.ontouchend = stoppedClicking;
+            canvas.ontouchmove = isMoving;
+        </script>
+    </body>
+</html>
