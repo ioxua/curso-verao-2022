@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            #quad {
+                width: 50px;
+                height: 50px;
+                background-color: blueviolet;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="quad"></div>
+        <p class="text"></p>
+        <p class="text"></p>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            document.onload = () => {};
+            $(function () {
+                const quad = document.getElementById("quad");
+                quad.onclick = () => {
+                    console.log("clicou");
+                };
+
+                // document.querySelectorAll('#quad')
+                $("#quad").click(() => {
+                    console.log("clicou");
+                });
+                $("p.text").text("loren ipsum dolor sit amet");
+                $("p.text").last().css("text-transform", "uppercase");
+                console.log($("p.text").last().css("text-transform"));
+            });
+        </script>
+    </body>
+</html>

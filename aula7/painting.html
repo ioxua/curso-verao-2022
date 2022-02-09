@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            .colorSquare {
+                width: 50px;
+                height: 50px;
+            }
+            .colorSquareWrapper {
+                display: flex;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="destructuring.js"></script>
+        <canvas id="painting" width="800" height="600"></canvas>
+        <div class="colorSquareWrapper">
+            <div class="colorSquare" data-ioxua-cs="red"></div>
+            <div class="colorSquare" data-ioxua-cs="#ff0"></div>
+            <div class="colorSquare" data-ioxua-cs="rgb(0, 0, 255)"></div>
+            <input id="colorSelector" type="color" />
+        </div>
+        <div>
+            <label for="brushSize">Brush Size</label>
+            <input id="brushSize" name="brushSize" type="number" />
+        </div>
+        <div>
+            <label for="brushTypeSq">Squared brush</label>
+            <input
+                id="brushTypeSq"
+                name="brushType"
+                type="radio"
+                value="square"
+            />
+            <label for="brushTypeRnd">Rounded brush</label>
+            <input
+                id="brushTypeRnd"
+                name="brushType"
+                type="radio"
+                value="circle"
+            />
+        </div>
+        <div>
+            <button id="saveCanvas">Save my work!</button>
+            <button id="clearCanvas">Clear!</button>
+        </div>
+
+        <script>
+            const localStorageKeys = {
+                brushSize: "brush_size",
+                brushType: "brush_type",
+                painting: "canvas_painting",
+            };
+
+            // Inicializar controles
+            const squares = document.querySelectorAll("[data-ioxua-cs]");
+            for (const square of squares) {
+                const color = square.dataset.ioxuaCs;
+                square.style.backgroundColor = color;
+                square.onclick = () => {
+                    window.paintingState.color = color;
+                };
+            }
+
+            const brushSizeEl = document.getElementById("brushSize");
+            brushSizeEl.onchange = () => {
+                // console.log("changes brushsize", brushSizeEl.value);
+                window.paintingState.brushSize = brushSizeEl.value;
+
+                // Setar o valor no localStorage
+                localStorage.setItem(
+                    localStorageKeys.brushSize,
+                    brushSizeEl.value
+                );
+            };
+
+            const brushTypeEls = document.querySelectorAll(
+                "input[name='brushType']"
+            );
+            const onChangeBrushType = (evt) => {
+                // console.log("changes brushtype", evt.target.value);
+                window.paintingState.brushType = evt.target.value;
+
+                // Setar o valor no localStorage
+                localStorage.setItem(
+                    localStorageKeys.brushType,
+                    evt.target.value
+                );
+            };
+
+            for (const el of brushTypeEls) {
+                el.onchange = onChangeBrushType;
+            }
+
+            // Inicializando valores do localStorage
+            if (localStorageKeys.brushSize in localStorage) {
+                brushSizeEl.value = localStorage.getItem(
+                    localStorageKeys.brushSize
+                );
+            }
+            if (localStorageKeys.brushType in localStorage) {
+                const selectedType = localStorage.getItem(
+                    localStorageKeys.brushType
+                );
+                // for (const el of brushTypeEls) {
+                //     if (el.value === selectedType) {
+                //         el.checked = true
+                //         console.log(el);
+                //         break
+                //     }
+                // }
+
+                Array.from(brushTypeEls).find(
+                    (el) => el.value === selectedType
+                ).checked = true;
+            }
+        </script>
+        <script>
+            // Canvas
+            const canvas = document.getElementById("painting");
+            const colorSelector = document.getElementById("colorSelector");
+            const ctx = canvas.getContext("2d");
+
+            window.paintingState = {
+                brushSize: 50,
+                brushType: "square",
+                mouseIsDown: false,
+                color: "red",
+            };
+
+            colorSelector.onchange = () => {
+                window.paintingState.color = colorSelector.value;
+            };
+
+            const isClicking = () => {
+                window.paintingState.mouseIsDown = true;
+            };
+
+            const stoppedClicking = () => {
+                window.paintingState.mouseIsDown = false;
+            };
+
+            const draw = ({ x, y }) => {
+                ctx.fillStyle = window.paintingState.color;
+
+                if (window.paintingState.brushType === "square") {
+                    const drawX = x - window.paintingState.brushSize / 2;
+                    const drawY = y - window.paintingState.brushSize / 2;
+                    ctx.fillRect(
+                        drawX,
+                        drawY,
+                        window.paintingState.brushSize,
+                        window.paintingState.brushSize
+                    );
+                } else if (window.paintingState.brushType === "circle") {
+                    ctx.beginPath();
+                    ctx.ellipse(
+                        x,
+                        y,
+                        window.paintingState.brushSize / 2,
+                        window.paintingState.brushSize / 2,
+                        1,
+                        0,
+                        2 * Math.PI
+                    );
+                    ctx.fill();
+                    ctx.closePath();
+                }
+            };
+
+            const isMoving = (evt) => {
+                if (window.paintingState.mouseIsDown) {
+                    const x = evt.x,
+                        y = evt.y;
+                    draw({ x, y });
+                }
+            };
+
+            canvas.onmousedown = isClicking;
+            canvas.onmouseup = stoppedClicking;
+            canvas.onmousemove = isMoving;
+            canvas.onclick = ({ x, y }) => {
+                draw({
+                    x,
+                    y,
+                });
+            };
+
+            canvas.ontouchstart = isClicking;
+            canvas.ontouchend = stoppedClicking;
+            canvas.ontouchmove = isMoving;
+        </script>
+        <script>
+            //https://stackoverflow.com/a/61226119
+            const blobToBase64 = (blob, cb) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                    cb(reader.result);
+                };
+            };
+
+            const saveCanvasEl = document.getElementById("saveCanvas");
+            const clearCanvasEl = document.getElementById("clearCanvas");
+
+            saveCanvasEl.onclick = () => {
+                const otherCallback = (base64) => {
+                    console.log("as base64!", base64);
+                    localStorage.setItem(localStorageKeys.painting, base64);
+                };
+
+                const callback = (blob) => {
+                    console.log("as blob!", blob);
+                    blobToBase64(blob, otherCallback);
+                };
+
+                canvas.toBlob(callback);
+                console.log("after to blob");
+            };
+
+            clearCanvasEl.onclick = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            };
+        </script>
+    </body>
+</html>

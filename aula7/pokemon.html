@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            #quad {
+                width: 50px;
+                height: 50px;
+                background-color: blueviolet;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content"></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            $(function () {
+                const renderPokemon = (pokemon) => {
+                    // console.log(pokemon);
+                    const spriteUrl = pokemon.sprites.other.dream_world.front_default
+                    const $imgEl = $(`<img src="${spriteUrl}">`)
+
+                    $('#content').append($imgEl)
+                };
+
+                const getPokemonData = (pokemon) => {
+                    $.ajax(pokemon.url, {
+                        success: renderPokemon,
+                    });
+                };
+
+                fetch("https://pokeapi.co/api/v2/pokemon")
+                    .then(function(result) {
+                        result.json().then(function(apiResponse) {
+                            console.log('fetch', apiResponse)
+                            for (const pokemon of apiResponse.results) {
+                                getPokemonData(pokemon)
+                            }
+                        })
+                    })
+
+                $.ajax("https://pokeapi.co/api/v2/pokemon", {
+                    success: function(apiResponse) {
+                        console.log('ajax', apiResponse)
+                        for (const pokemon of apiResponse.results) {
+                            getPokemonData(pokemon)
+                        }
+                        // data.results.forEach((p) => {
+                        //     return renderPokemon(p);
+                        // });
+                        // data.results.forEach((p) => renderPokemon(p));
+                        // data.results.forEach(getPokemonData);
+                    },
+                });
+            });
+        </script>
+    </body>
+</html>
