@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            class Animal {
+                numeroDePatas = 0
+                #numeroDeOlhos = 2
+
+                constructor(nome) {
+                    this.nome = nome;
+                }
+                getNome() {
+                    return this.nome;
+                }
+                getNumeroDeOlhos() {
+                    return this.#numeroDeOlhos
+                }
+            }
+
+            class Gato extends Animal {
+                constructor() {
+                    super("Gaaaato");
+                    this.numeroDePatas = 4
+                    // super.#numeroDeOlhos = 2
+                }
+                miar() {
+                    console.log("Miaaau~");
+                }
+                // getNumeroDeOlhos() {
+                //     return this.#numeroDeOlhos
+                // }
+            }
+
+            const animal = new Animal('um animal diferente');
+            const gato = new Gato();
+
+            console.log(animal.getNome());
+            console.log(gato.getNome());
+            gato.miar();
+            console.log('gato.numeroDePatas', gato.numeroDePatas)
+            console.log('gato.numeroDeOlhos', gato.numeroDeOlhos)
+            console.log('gato.getNumeroDeOlhos()', gato.getNumeroDeOlhos())
+            // console.log(gato.#numeroDeOlhos)
+        </script>
+    </body>
+</html>

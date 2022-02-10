@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            ioxua-tooltip {
+                background-color: beige;
+            }
+            ioxua-tooltip .tooltip {
+                /* why doesn't unset/initial work? */
+                /* background-color: unset; */
+
+                display: none;
+                max-width: 100px;
+                position: absolute;
+                font-size: 6px;
+                background-color: bisque;
+                border-radius: 10px;
+                padding: 5px 10px;
+            }
+            ioxua-tooltip .tooltip.visible {
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <ioxua-botao-legal></ioxua-botao-legal>
+        <br />
+        <ioxua-tooltip
+            tooltip="isso aqui so aparece quando vc da hover com o seu mouse lindo"
+        >
+            <span>meu texto</span>
+        </ioxua-tooltip>
+        <br />
+        <ioxua-tooltip tooltip="este aqui eh um outro tooltip">
+            <span>meu outro texto</span>
+        </ioxua-tooltip>
+
+        <script>
+            console.log("antes da definição");
+            class BotaoLegal extends HTMLElement {
+                constructor() {
+                    super();
+                }
+
+                connectedCallback() {
+                    console.log("asdasd");
+                    const btn = document.createElement("button");
+                    btn.innerText = "meu botao bonito";
+                    btn.onclick = () => {
+                        console.log('clicou no botao')
+                    }
+                    this.appendChild(btn);
+                }
+            }
+
+            class IoxTooltip extends HTMLElement {
+                constructor() {
+                    super();
+                }
+
+                connectedCallback() {
+                    // this.root = this.attachShadow({mode: 'open'});
+                    // this.root.append(...this.children)
+
+                    // console.log("this", this);
+                    // console.log("tooltip", this.getAttribute("tooltip"));
+                    this.onmouseover = this.show;
+                    this.onmouseout = this.hide;
+                    this.ontouchstart = this.show;
+                    this.ontouchend = this.hide;
+
+                    this.tooltipEl = document.createElement("span");
+                    this.tooltipEl.classList.add("tooltip");
+                    this.tooltipEl.innerText = this.getAttribute("tooltip");
+                    this.appendChild(this.tooltipEl);
+                }
+
+                show() {
+                    console.log("show");
+                    this.tooltipEl.classList.add('visible');
+                }
+
+                hide() {
+                    console.log("hide");
+                    this.tooltipEl.classList.remove('visible');
+                }
+            }
+
+            customElements.define("ioxua-botao-legal", BotaoLegal);
+            customElements.define("ioxua-tooltip", IoxTooltip);
+        </script>
+    </body>
+</html>

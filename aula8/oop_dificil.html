@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const FormaGeometrica = {
+                getArea: function () {
+                    throw new Error("Não há como calcular");
+                },
+            };
+
+            const Retangulo = {
+                altura: 12,
+                largura: 8,
+                getArea: function () {
+                    return this.altura * this.largura;
+                },
+            };
+
+            const Estrela = {};
+
+            Object.setPrototypeOf(Estrela, FormaGeometrica);
+            Object.setPrototypeOf(Retangulo, FormaGeometrica);
+
+            console.log("Estrela", Estrela);
+            console.log("Retangulo", Retangulo);
+            console.log(Retangulo.getArea());
+            // console.log(Estrela.getArea())
+
+            const retangulozinho = Object.create(Retangulo);
+            console.log("retangulozinho", retangulozinho);
+
+            /*
+class FormaGeometrica {
+    getArea()
+}
+
+class Estrela extends FormaGeometrica {}
+class Retangulo extends FormaGeometrica {
+    int altura, largura;
+    getArea() {
+        return altura * largura
+    }
+}
+*/
+
+            function Animal(nome) {
+                this.nome = nome;
+            }
+
+            Animal.prototype.getNome = function () {
+                return this.nome;
+            };
+
+            console.log("Animal", Animal);
+
+            function Gato() {
+                this.nome = "Gaaaaaatooooo";
+            }
+
+            Gato.prototype = new Animal();
+
+            Gato.prototype.miar = function () {
+                console.log("miau~");
+            };
+
+            console.log("Gato", Gato);
+
+            console.log(new Animal("cachorro").getNome());
+
+            const gato = new Gato();
+            console.log(gato.getNome());
+            gato.miar();
+        </script>
+    </body>
+</html>
