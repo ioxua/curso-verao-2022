@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button id="alert">alert!</button>
+        <button id="popup">popup!</button>
+        <button class="like">like!</button>
+
+        <input type="text" />
+
+        <div id="popupContainer">
+            <button id="closePopup">fechar</button>
+            <div id="popupContent"></div>
+        </div>
+        <script>
+            // saber qto tempo o usuario passou com a pag aberta/fechada
+            // visibility web api
+            // saiu 8000ms
+            // entrou 2000ms
+            // saiu 8000ms
+            // el.onclick = () => {}
+            // el.addEventListener('click', () => {})
+            window.myState = {
+                lastVisibilityChangeInMillis: 0,
+            };
+
+            const sendAnalytics = (payload) => {
+                payload.userId = '123'
+                const headers = {
+                    type: "application/json",
+                };
+                const blob = new Blob([JSON.stringify(payload)], headers);
+                navigator.sendBeacon("http://localhost:1234/analytics", blob);
+            };
+
+            document.addEventListener("visibilitychange", () => {
+                const time = performance.now();
+                const payload = {
+                    timeSinceLast:
+                        time - window.myState.lastVisibilityChangeInMillis,
+                };
+
+                if (document.visibilityState === "hidden") {
+                    payload.type = "pageHidden";
+                } else {
+                    payload.type = "pageShown";
+                }
+
+                sendAnalytics(payload);
+                window.myState.lastVisibilityChangeInMillis = time;
+            });
+        </script>
+        <script>
+            // popups js -> alert
+            const alertEl = document.getElementById("alert");
+            alertEl.addEventListener("click", () => {
+                alert(
+                    "asdljoasihuigdashoidjpkaisjhdubisadhoijpiahsobdviyasuhoidjoasbivhdaj!"
+                );
+            });
+
+            const popupContainer = document.getElementById("popupContainer");
+            const popupContent = document.getElementById("popupContent");
+            const closePopup = document.getElementById("closePopup");
+            closePopup.onclick = () => {
+                popupContainer.style.display = "none";
+            };
+
+            const style = document.createElement("style");
+            style.innerText = `
+                #popupContainer {
+                    background-color: black;
+                    opacity: 0.7;
+                    position: fixed;
+                    width: 100vw;
+                    height: 100vh;
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                }
+                #popupContent {
+                    min-width: 150px;
+                    max-width: 500px;
+                    min-heigth: 150px;
+                }
+                `;
+            popupContainer.append(style);
+
+            const popup = document.getElementById("popup");
+            popup.addEventListener("click", () => {
+                popupContent.innerHTML = "<p>lorem ipsum dolor sit amet</p>";
+                popupContainer.style.display = "flex";
+            });
+        </script>
+        <script>
+            // registro de clicks
+            // custom attribute
+            const allClickableEls =
+                document.querySelectorAll("button, p, input");
+            for (const el of allClickableEls) {
+                el.onclick = (evt) => {
+                    console.log(evt);
+                    const identifier = `${evt.target.tagName}#${evt.target.id}`;
+                    sendAnalytics({
+                        type: "userClicked",
+                        id: identifier,
+                    });
+                };
+            }
+        </script>
+        <script>
+            // botoes de like/comment -> css/sendBeacon
+            const allLikeableEls = document.querySelectorAll(".like");
+            for (const el of allLikeableEls) {
+                el.onclick = (evt) => {
+                    console.log(evt);
+                    const identifier = `${evt.target.tagName}#${evt.target.id}`;
+                    sendAnalytics({
+                        type: "userLiked",
+                        id: identifier,
+                    });
+                };
+            }
+        </script>
+    </body>
+</html>
