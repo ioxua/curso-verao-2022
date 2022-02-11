@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #quadrado {
+            min-width: 50px;
+            min-height: 50px;
+            background-color: red;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="quadrado"></div>
+    <script>
+        
+        console.log('antes do interval');
+        const intervalId = setInterval(() => {
+            console.log('interval!')
+        }, 700)
+        console.log('depois do interval');
+
+        console.log('antes do timeout');
+        setTimeout(() => {
+            console.log('dentro do timeout!')
+            clearInterval(intervalId)
+        }, 1600)
+        console.log('depois do timeout');
+
+
+        const quadrado = document.getElementById('quadrado')
+        setInterval((e) => {
+            const nextWidth = quadrado.offsetWidth + 10
+            quadrado.style.width = nextWidth + 'px'
+        }, 500)
+
+    </script>
+</body>
+</html>

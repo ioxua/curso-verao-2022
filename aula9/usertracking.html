@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            /* ::selection {
+                /* color: red; 
+                /* background-color: transparent;
+            } */
+        </style>
+    </head>
+    <body>
+        <button id="alert" data-ioxua-rastrear-click>alert!</button>
+        <button id="openPopup">popup!</button>
+        <button class="like">like!</button>
+
+        <a href="https://google.com" target="_blank">link!!</a>
+
+        <input type="text" />
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
+            facere officia delectus, aperiam eaque voluptate sequi animi quas
+            ducimus debitis neque at? Maiores nobis sunt eligendi aspernatur
+            dicta ut fugit?
+        </p>
+
+        <div id="popupContainer">
+            <button id="closePopup">fechar</button>
+            <div id="popupContent"></div>
+        </div>
+        <script>
+            document.addEventListener("ioxua-clicou", (evt) => {
+                console.log("ioxua clicou!!!!!", evt);
+            });
+
+            window.dispatchEvent(new Event("ioxua-clicou"));
+            document.dispatchEvent(new Event("ioxua-clicou"));
+            // form.onsubmit = () => {
+            //     return false
+            // }
+        </script>
+        <script>
+            // saber qto tempo o usuario passou com a pag aberta/fechada
+            // visibility web api
+            // saiu 8000ms
+            // entrou 2000ms
+            // saiu 8000ms
+            // el.onclick = () => {}
+            // el.addEventListener('click', () => {})
+
+            let lastVisibilityChangeInMillis = 0;
+
+            const sendAnalytics = (payload) => {
+                payload.userId = "123";
+                const headers = {
+                    type: "application/json",
+                };
+                const blob = new Blob([JSON.stringify(payload)], headers);
+                console.info("sending event", payload);
+                // navigator.sendBeacon("http://localhost:1234/analytics", blob);
+            };
+
+            // getElementById('asdasd').onmouseover = () => {}
+            // getElementById('asdasd').addEventListener('mouseover', () => {})
+
+            document.addEventListener("visibilitychange", () => {
+                const time = performance.now();
+                const payload = {
+                    timeSinceLast: time - lastVisibilityChangeInMillis,
+                };
+
+                if (document.visibilityState === "hidden") {
+                    payload.type = "pageHidden";
+                } else {
+                    payload.type = "pageShown";
+                }
+
+                sendAnalytics(payload);
+                lastVisibilityChangeInMillis = time;
+            });
+        </script>
+        <script>
+            const links = document.querySelectorAll("a");
+            for (const link of links) {
+                link.onclick = () => {
+                    alert("link!");
+                    // return false
+                };
+            }
+
+            // popups js -> alert
+            const alertEl = document.getElementById("alert");
+            alertEl.addEventListener("click", () => {
+                alert(
+                    "asdljoasihuigdashoidjpkaisjhdubisadhoijpiahsobdviyasuhoidjoasbivhdaj!"
+                );
+            });
+
+            const popupContainer = document.getElementById("popupContainer");
+            const popupContent = document.getElementById("popupContent");
+            const closePopup = document.getElementById("closePopup");
+            closePopup.addEventListener("click", () => {
+                console.log("fechando o popup");
+                popupContainer.style.display = "none";
+            });
+
+            const style = document.createElement("style");
+            style.innerText = `
+                #popupContainer {
+                    background-color: black;
+                    opacity: 0.7;
+                    position: fixed;
+                    width: 100vw;
+                    height: 100vh;
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    top: 0;
+                    left: 0;
+                    flex-direction: column;
+                    gap: 15px;
+                }
+                #popupContent {
+                    min-width: 150px;
+                    max-width: 500px;
+                    min-heigth: 150px;
+                    background-color: white;
+                    padding: 10px 15px;
+                    border-radius: 15px;
+                }`;
+            popupContainer.append(style);
+
+            const openPopup = document.getElementById("openPopup");
+            openPopup.addEventListener("click", () => {
+                popupContent.innerHTML = "<p>lorem ipsum dolor sit amet</p>";
+                popupContainer.style.display = "flex";
+            });
+        </script>
+        <script>
+            // registro de clicks
+            // custom attribute
+            const allClickableEls = document.querySelectorAll("button, input");
+            for (const el of allClickableEls) {
+                el.addEventListener("click", (evt) => {
+                    // console.log('tracking click');
+                    console.log(evt);
+                    const identifier = `${evt.target.tagName}#${evt.target.id}`;
+                    sendAnalytics({
+                        type: "userClicked",
+                        id: identifier,
+                    });
+                });
+            }
+        </script>
+        <script>
+            // botoes de like/comment -> css/sendBeacon
+            const allLikeableEls = document.querySelectorAll(".like");
+            for (const el of allLikeableEls) {
+                el.onclick = (evt) => {
+                    console.log(evt);
+                    const identifier = `${evt.target.tagName}#${evt.target.id}`;
+                    sendAnalytics({
+                        type: "userLiked",
+                        id: identifier,
+                    });
+                };
+            }
+        </script>
+        <script>
+            document.addEventListener("keypress", (evt) => {
+                console.log("keyrpess", evt);
+            });
+            document.addEventListener("copy", (e) => {
+                // e.clipboardData is initially empty, but we can set it to the
+                // data that we want copied onto the clipboard.
+
+                console.log(e);
+                e.clipboardData.setData(
+                    "text/plain",
+                    "cuidado com a copia amiguinho: "
+                );
+                setTimeout(() => {}, 1000);
+
+                // This is necessary to prevent the current document selection from
+                // being written to the clipboard.
+                // e.preventDefault()
+            });
+        </script>
+    </body>
+</html>
